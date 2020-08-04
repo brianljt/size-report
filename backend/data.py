@@ -5,7 +5,7 @@ from backend.db import *
 
 app = current_app
 
-@app.route("/getcommit", methods=("GET","POST"))
+@app.route("/getcommit", methods=("GET","POST",))
 def retrieve_commit_data():
     db = get_db()
 
@@ -17,7 +17,7 @@ def retrieve_commit_data():
             return
         
         commit = request.get_json()["commits"][0]
-        parent_commit = request.get_json["commits"][1]
+        parent_commit = request.get_json()["commits"][1]
         db.execute("insert into commitinfo value({},{},{})".format(commit["commit_id"], commit["timestamp"], parent_commit["parent_commit_id"]))
 
         for item in commit["code_size"]:
