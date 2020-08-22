@@ -50,59 +50,59 @@
 </div>
 
 <script>
-  var ctx = document.getElementById('sizeChart')
-  var commitid = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
-  var sizeChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: commitid,
-      datasets: [
-        {
-          label: 'total',
-          color: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          fill: false,
-          data: [65, 59, 80, 81, 56, 55, 40],
-          steppedLine: true,
+      var ctx = document.getElementById('sizeChart')
+      var commitid = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
+      var sizeChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: commitid,
+          datasets: [
+            {
+              label: 'total',
+              color: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              fill: false,
+              data: [65, 59, 80, 81, 56, 55, 40],
+              steppedLine: true,
+            },
+            {
+              label: 'bss',
+              color: 'rgb(151,187,205)',
+              borderColor: 'rgb(151,187,205)',
+              fill: false,
+              data: [28, 48, 40, 19, 56, 27, 90],
+              steppedLine: true,
+            }
+          ]
         },
-        {
-          label: 'bss',
-          color: 'rgb(151,187,205)',
-          borderColor: 'rgb(151,187,205)',
-          fill: false,
-          data: [28, 48, 40, 19, 56, 27, 90],
-          steppedLine: true,
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      legend: {
-        position: 'bottom'
-      },
-      scales: {
-        xAxes: [{display: false}],
-      },
-    },
-  })
-
-  // document.getElementById('addData').addEventListener('click', function () {
-  //   if (sizeChart.data.datasets.length > 0) {
-  //     sizeChart.data.labels.push(sizeChart.data.labels.length)
-  //     for (var index = 0; index < sizeChart.data.datasets.length; ++index) {
-  //       if (typeof sizeChart.data.datasets[index].data[0] === 'object') {
-  //         sizeChart.data.datasets[index].data.push({
-  //           x: sizeChart.data.datasets[index].data.length,
-  //           y: 100 * Math.random(),
-  //         })
-  //       } else {
-  //         sizeChart.data.datasets[index].data.push(100 * Math.random())
-  //       }
-  //     }
-  //
-  //     window.sizeChart.update()
-  //   }
-  // })
+        options: {
+          responsive: true,
+          legend: {
+            position: 'bottom'
+          },
+          scales: {
+            xAxes: [{display: false}],
+          },
+        },
+      })
+      
+      // document.getElementById('addData').addEventListener('click', function () {
+      //   if (sizeChart.data.datasets.length > 0) {
+      //     sizeChart.data.labels.push(sizeChart.data.labels.length)
+      //     for (var index = 0; index < sizeChart.data.datasets.length; ++index) {
+      //       if (typeof sizeChart.data.datasets[index].data[0] === 'object') {
+      //         sizeChart.data.datasets[index].data.push({
+      //           x: sizeChart.data.datasets[index].data.length,
+      //           y: 100 * Math.random(),
+      //         })
+      //       } else {
+      //         sizeChart.data.datasets[index].data.push(100 * Math.random())
+      //       }
+      //     }
+      //
+      //     window.sizeChart.update()
+      //   }
+      // })
 
 </script>
 </body>
