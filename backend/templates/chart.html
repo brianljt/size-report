@@ -83,9 +83,12 @@
           scales: {
             xAxes: [{display: false}],
           },
+          tooltips: {
+            mode: 'index',
+            intersect: false,
+          },
         },
       })
-      
       // document.getElementById('addData').addEventListener('click', function () {
       //   if (sizeChart.data.datasets.length > 0) {
       //     sizeChart.data.labels.push(sizeChart.data.labels.length)
