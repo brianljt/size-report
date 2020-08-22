@@ -32,9 +32,10 @@
 
     <hr>
 
+    <script>$('.selectpicker').selectpicker('refresh');</script>
     <div class="select-container" style="text-align: center">
         Showing size of
-        <select class="selectpicker">
+        <select class="selectpicker" id="commit_num" onchange="CommitNumChange(this)">
             <option value="10">10</option>
             <option value="30">30</option>
             <option value="50">50</option>
@@ -51,6 +52,16 @@
 </div>
 
 <script>
+
+    var commitnum = 10
+
+    function CommitNumChange(obj) {
+      commitnumm = $('#commit_num').val()
+    }
+
+    // var num = $('#commit_num').val()
+    // alert(num)
+    // $('#commit_num').refresh()
   var ctx = document.getElementById('sizeChart')
   var commitid = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
   var sizeChart = new Chart(ctx, {
