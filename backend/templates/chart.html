@@ -7,7 +7,7 @@
     <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
 
     <script src="https://use.typekit.net/kfx1lmb.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script>try {Typekit.load({ async: true })} catch (e) {}</script>
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
@@ -24,7 +24,8 @@
         <h1 class="hero-title">Size Report</h1>
         <h2 class="hero-subtitle">A tool to log, compare, display code size change history</h2>
         <div class="hero-button-wrapper">
-            <a class="button button__red" href="https://docs.google.com/document/d/19Mi1X2a9Y5EeAMDLKsj6GJjE6aEj3QV7wKpgPD1ygd4/" target="_blank">Design Doc</a>
+            <a class="button button__red"
+               href="https://docs.google.com/document/d/19Mi1X2a9Y5EeAMDLKsj6GJjE6aEj3QV7wKpgPD1ygd4/" target="_blank">Design Doc</a>
             <a class="button button__black" href="https://github.com/brianljt/size-report" target="_blank">GitHub</a>
         </div>
     </div>
@@ -44,68 +45,68 @@
 
     <div class="chart-container">
         <canvas id="sizeChart"></canvas>
-<!--        <button id="addData">Add Data</button>-->
+        <!--        <button id="addData">Add Data</button>-->
     </div>
 
 </div>
 
 <script>
-      var ctx = document.getElementById('sizeChart')
-      var commitid = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
-      var sizeChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: commitid,
-          datasets: [
-            {
-              label: 'total',
-              color: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
-              fill: false,
-              data: [65, 59, 80, 81, 56, 55, 40],
-              steppedLine: true,
-            },
-            {
-              label: 'bss',
-              color: 'rgb(151,187,205)',
-              borderColor: 'rgb(151,187,205)',
-              fill: false,
-              data: [28, 48, 40, 19, 56, 27, 90],
-              steppedLine: true,
-            }
-          ]
+  var ctx = document.getElementById('sizeChart')
+  var commitid = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
+  var sizeChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: commitid,
+      datasets: [
+        {
+          label: 'total',
+          color: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false,
+          data: [65, 59, 80, 81, 56, 55, 40],
+          steppedLine: true,
         },
-        options: {
-          responsive: true,
-          legend: {
-            position: 'bottom'
-          },
-          scales: {
-            xAxes: [{display: false}],
-          },
-          tooltips: {
-            mode: 'index',
-            intersect: false,
-          },
-        },
-      })
-      // document.getElementById('addData').addEventListener('click', function () {
-      //   if (sizeChart.data.datasets.length > 0) {
-      //     sizeChart.data.labels.push(sizeChart.data.labels.length)
-      //     for (var index = 0; index < sizeChart.data.datasets.length; ++index) {
-      //       if (typeof sizeChart.data.datasets[index].data[0] === 'object') {
-      //         sizeChart.data.datasets[index].data.push({
-      //           x: sizeChart.data.datasets[index].data.length,
-      //           y: 100 * Math.random(),
-      //         })
-      //       } else {
-      //         sizeChart.data.datasets[index].data.push(100 * Math.random())
-      //       }
-      //     }
-      //
-      //     window.sizeChart.update()
-      //   }
-      // })
+        {
+          label: 'bss',
+          color: 'rgb(151,187,205)',
+          borderColor: 'rgb(151,187,205)',
+          fill: false,
+          data: [28, 48, 40, 19, 56, 27, 90],
+          steppedLine: true,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      legend: {
+        position: 'bottom'
+      },
+      scales: {
+        xAxes: [{ display: false }],
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+      },
+    },
+  })
+  // document.getElementById('addData').addEventListener('click', function () {
+  //   if (sizeChart.data.datasets.length > 0) {
+  //     sizeChart.data.labels.push(sizeChart.data.labels.length)
+  //     for (var index = 0; index < sizeChart.data.datasets.length; ++index) {
+  //       if (typeof sizeChart.data.datasets[index].data[0] === 'object') {
+  //         sizeChart.data.datasets[index].data.push({
+  //           x: sizeChart.data.datasets[index].data.length,
+  //           y: 100 * Math.random(),
+  //         })
+  //       } else {
+  //         sizeChart.data.datasets[index].data.push(100 * Math.random())
+  //       }
+  //     }
+  //
+  //     window.sizeChart.update()
+  //   }
+  // })
 
 </script>
 </body>
