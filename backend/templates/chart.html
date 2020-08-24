@@ -9,6 +9,8 @@
     <script src="https://use.typekit.net/kfx1lmb.js"></script>
     <script>try {Typekit.load({ async: true })} catch (e) {}</script>
 
+    <script src="../src/script.js"></script>
+
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
@@ -57,6 +59,10 @@
 
     function CommitNumChange(obj) {
       commitnumm = $('#commit_num').val()
+
+      var res = GetDataListBySummaryList()
+      alert(res)
+
     }
 
     // var num = $('#commit_num').val()
