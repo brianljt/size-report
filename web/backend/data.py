@@ -1,7 +1,7 @@
 from flask import request
 from flask import jsonify
 from flask import current_app
-from backend.db import *
+from .db import *
 from flask import render_template
 from flask import Blueprint
 

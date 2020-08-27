@@ -1,0 +1,8 @@
+runtime: python38
+entrypoint: gunicorn -b :$PORT backend:app
+
+handlers:
+  # This configures Google App Engine to serve the files in the app's static
+  # directory.
+- url: /static
+  static_dir: static
