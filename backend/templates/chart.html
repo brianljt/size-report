@@ -27,18 +27,19 @@
         <h2 class="hero-subtitle">A tool to log, compare, display code size change history</h2>
         <div class="hero-button-wrapper">
             <a class="button button__red"
-               href="https://docs.google.com/document/d/19Mi1X2a9Y5EeAMDLKsj6GJjE6aEj3QV7wKpgPD1ygd4/" target="_blank">Design Doc</a>
+               href="https://docs.google.com/document/d/19Mi1X2a9Y5EeAMDLKsj6GJjE6aEj3QV7wKpgPD1ygd4/" target="_blank">Design
+                Doc</a>
             <a class="button button__black" href="https://github.com/brianljt/size-report" target="_blank">GitHub</a>
         </div>
     </div>
 
     <hr>
 
-    <script>$('.selectpicker').selectpicker('refresh');</script>
+    <script>$('.selectpicker').selectpicker('refresh')</script>
     <div class="select-container" style="text-align: center">
         Showing size of
         <select class="selectpicker" id="commit_num" onchange="CommitNumChange(this)">
-<!--        <select class="selectpicker" id="commit_num">-->
+            <!--        <select class="selectpicker" id="commit_num">-->
             <option value="10">10</option>
             <option value="30">30</option>
             <option value="50">50</option>
@@ -56,20 +57,12 @@
 
 <script>
 
-    var commitnum = 10
-    // var commitid = []
-    // var total = []
-    // var bss = []
-    var commitid = []
-    var show_text = []
-    var show_data = []
-    var show_bss = []
-    var show_total = []
-
-    // var num = $('#commit_num').val()
-    // alert(num)
-    // $('#commit_num').refresh()
-
+  var commitnum = 10
+  var commitid = []
+  var show_text = []
+  var show_data = []
+  var show_bss = []
+  var show_total = []
 
   var ctx = document.getElementById('sizeChart')
   var sizeChart = new Chart(ctx, {
@@ -126,26 +119,26 @@
     },
   })
 
-    async function load() {
-      let datalist = await GetDataListBySummaryList()
-      sizeChart.data.labels = datalist[0]
-      sizeChart.data.datasets[0].data = datalist[1]
-      sizeChart.data.datasets[1].data = datalist[2]
-      sizeChart.data.datasets[2].data = datalist[3]
-      sizeChart.data.datasets[3].data = datalist[4]
-      window.sizeChart.update()
-    }
+  async function load () {
+    let datalist = await GetDataListBySummaryList()
+    sizeChart.data.labels = datalist[0]
+    sizeChart.data.datasets[0].data = datalist[1]
+    sizeChart.data.datasets[1].data = datalist[2]
+    sizeChart.data.datasets[2].data = datalist[3]
+    sizeChart.data.datasets[3].data = datalist[4]
+    window.sizeChart.update()
+  }
 
-    async function CommitNumChange(obj) {
-      commitnum = $('#commit_num').val()
-      let datalist = await GetDataListBySummaryList("", commitnum)
-      sizeChart.data.labels = datalist[0]
-      sizeChart.data.datasets[0].data = datalist[1]
-      sizeChart.data.datasets[1].data = datalist[2]
-      sizeChart.data.datasets[2].data = datalist[3]
-      sizeChart.data.datasets[3].data = datalist[4]
-      window.sizeChart.update()
-    }
+  async function CommitNumChange (obj) {
+    commitnum = $('#commit_num').val()
+    let datalist = await GetDataListBySummaryList('', commitnum)
+    sizeChart.data.labels = datalist[0]
+    sizeChart.data.datasets[0].data = datalist[1]
+    sizeChart.data.datasets[1].data = datalist[2]
+    sizeChart.data.datasets[2].data = datalist[3]
+    sizeChart.data.datasets[3].data = datalist[4]
+    window.sizeChart.update()
+  }
 
   // document.getElementById('addData').addEventListener('click', function () {
   //   if (sizeChart.data.datasets.length > 0) {
