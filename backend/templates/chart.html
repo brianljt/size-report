@@ -9,7 +9,7 @@
     <script src="https://use.typekit.net/kfx1lmb.js"></script>
     <script>try {Typekit.load({ async: true })} catch (e) {}</script>
 
-    <script src="../src/script.js"></script>
+    <script type="text/javascript" src="../static/js/myscript.js"></script>
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css">
 </head>
 
-<body>
+<body onload="load();">
 
 <div class="content-wrapper">
     <div class="hero-container">
@@ -38,6 +38,7 @@
     <div class="select-container" style="text-align: center">
         Showing size of
         <select class="selectpicker" id="commit_num" onchange="CommitNumChange(this)">
+<!--        <select class="selectpicker" id="commit_num">-->
             <option value="10">10</option>
             <option value="30">30</option>
             <option value="50">50</option>
@@ -56,39 +57,56 @@
 <script>
 
     var commitnum = 10
-
-    function CommitNumChange(obj) {
-      commitnumm = $('#commit_num').val()
-
-      var res = GetDataListBySummaryList()
-      alert(res)
-
-    }
+    // var commitid = []
+    // var total = []
+    // var bss = []
+    var commitid = []
+    var show_text = []
+    var show_data = []
+    var show_bss = []
+    var show_total = []
 
     // var num = $('#commit_num').val()
     // alert(num)
     // $('#commit_num').refresh()
+
+
   var ctx = document.getElementById('sizeChart')
-  var commitid = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
   var sizeChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: commitid,
       datasets: [
         {
-          label: 'total',
-          color: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
+          label: 'text',
+          color: 'rgb(239,207,255)',
+          borderColor: 'rgb(239,207,255)',
           fill: false,
-          data: [65, 59, 80, 81, 56, 55, 40],
+          data: show_text,
+          steppedLine: true,
+        },
+        {
+          label: 'data',
+          color: 'rgb(255,197,115)',
+          borderColor: 'rgb(255,197,115)',
+          fill: false,
+          data: show_data,
           steppedLine: true,
         },
         {
           label: 'bss',
+          color: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false,
+          data: show_bss,
+          steppedLine: true,
+        },
+        {
+          label: 'total',
           color: 'rgb(151,187,205)',
           borderColor: 'rgb(151,187,205)',
           fill: false,
-          data: [28, 48, 40, 19, 56, 27, 90],
+          data: show_total,
           steppedLine: true,
         }
       ]
@@ -107,6 +125,28 @@
       },
     },
   })
+
+    async function load() {
+      let datalist = await GetDataListBySummaryList()
+      sizeChart.data.labels = datalist[0]
+      sizeChart.data.datasets[0].data = datalist[1]
+      sizeChart.data.datasets[1].data = datalist[2]
+      sizeChart.data.datasets[2].data = datalist[3]
+      sizeChart.data.datasets[3].data = datalist[4]
+      window.sizeChart.update()
+    }
+
+    async function CommitNumChange(obj) {
+      commitnum = $('#commit_num').val()
+      let datalist = await GetDataListBySummaryList("", commitnum)
+      sizeChart.data.labels = datalist[0]
+      sizeChart.data.datasets[0].data = datalist[1]
+      sizeChart.data.datasets[1].data = datalist[2]
+      sizeChart.data.datasets[2].data = datalist[3]
+      sizeChart.data.datasets[3].data = datalist[4]
+      window.sizeChart.update()
+    }
+
   // document.getElementById('addData').addEventListener('click', function () {
   //   if (sizeChart.data.datasets.length > 0) {
   //     sizeChart.data.labels.push(sizeChart.data.labels.length)
