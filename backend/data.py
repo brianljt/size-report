@@ -12,15 +12,17 @@ app = Blueprint("data", __name__)
 def index():
     return render_template("chart.html")
 
-@app.route("/getcommit", methods=("POST",))
+@app.route("/getcommit", methods=("GET","POST"))
 def retrieve_commit_data():
     db = get_db()
 
+    # test
+    if request.method == "GET":
+        print("Hello World!")
+        return jsonify({"status": "OK"})
+
     if request.method == "POST":
         content_type = request.headers["Content-type"]
-
-        if content_type != "application/json":
-            return
 
         json = request.get_json()
 
