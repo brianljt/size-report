@@ -27,8 +27,7 @@
         <h2 class="hero-subtitle">A tool to log, compare, display code size change history</h2>
         <div class="hero-button-wrapper">
             <a class="button button__red"
-               href="https://docs.google.com/document/d/19Mi1X2a9Y5EeAMDLKsj6GJjE6aEj3QV7wKpgPD1ygd4/" target="_blank">Design
-                Doc</a>
+               href="https://docs.google.com/document/d/19Mi1X2a9Y5EeAMDLKsj6GJjE6aEj3QV7wKpgPD1ygd4/" target="_blank">Design Doc</a>
             <a class="button button__black" href="https://github.com/brianljt/size-report" target="_blank">GitHub</a>
         </div>
     </div>
@@ -281,31 +280,30 @@
   async function CommitNumChange (obj) {
     commitnum = $('#commit_num').val()
     let datalist = await GetDataListBySummaryList('', commitnum)
+
     chart_all.data.labels = datalist[0]
     chart_all.data.datasets[0].data = datalist[1]
     chart_all.data.datasets[1].data = datalist[2]
     chart_all.data.datasets[2].data = datalist[3]
     chart_all.data.datasets[3].data = datalist[4]
-    window.sizeChart.update()
-  }
+    window.chart_all.update()
 
-  // document.getElementById('addData').addEventListener('click', function () {
-  //   if (chart_all.data.datasets.length > 0) {
-  //     chart_all.data.labels.push(chart_all.data.labels.length)
-  //     for (var index = 0; index < chart_all.data.datasets.length; ++index) {
-  //       if (typeof chart_all.data.datasets[index].data[0] === 'object') {
-  //         chart_all.data.datasets[index].data.push({
-  //           x: chart_all.data.datasets[index].data.length,
-  //           y: 100 * Math.random(),
-  //         })
-  //       } else {
-  //         chart_all.data.datasets[index].data.push(100 * Math.random())
-  //       }
-  //     }
-  //
-  //     window.chart_all.update()
-  //   }
-  // })
+    chart_text.data.labels = datalist[0]
+    chart_text.data.datasets[0].data = datalist[1]
+    window.chart_text.update()
+
+    chart_data.data.labels = datalist[0]
+    chart_data.data.datasets[0].data = datalist[1]
+    window.chart_data.update()
+
+    chart_bss.data.labels = datalist[0]
+    chart_bss.data.datasets[0].data = datalist[1]
+    window.chart_bss.update()
+
+    chart_total.data.labels = datalist[0]
+    chart_total.data.datasets[0].data = datalist[1]
+    window.chart_total.update()
+  }
 
 </script>
 </body>
