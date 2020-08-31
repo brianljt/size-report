@@ -86,7 +86,19 @@ body.sidebar-padded {
     text-align: center;
 }
 
-.chart-container {
+.chart-all-container {
     margin: auto;
     width: 50%;
+}
+
+.chart-individual-container {
+    display: flex;
+    justify-content: center;
+}
+
+.chart-individual-item {
+    float: left;
+    width: 250px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
