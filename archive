@@ -14,7 +14,7 @@ rm -rf ${OT_TMP_DIR}/a
 mkdir ${OT_TMP_DIR}/b
 mkdir ${OT_TMP_DIR}/a
 
-git reset --hard 1ad22bac21f01597d86bf6f52aed6fd1a1b00d46
-git archive 1ad22bac21f01597d86bf6f52aed6fd1a1b00d46 | tar x -C "${OT_TMP_DIR}/b"
-git archive 9481634ccc5918e08c1945be408523ea29799d8d | tar x -C "${OT_TMP_DIR}/a" 
+git reset --hard  9c8f0951df1ba6a1209a3114af33151f7b7f96db
+git archive 9c8f0951df1ba6a1209a3114af33151f7b7f96db | tar x -C "${OT_TMP_DIR}/b"
+git archive 0729138e7be3e1bb6cb8e640383c09b886ed991d  | tar x -C "${OT_TMP_DIR}/a" 
 
