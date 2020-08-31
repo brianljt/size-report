@@ -2,9 +2,9 @@ OT_TMP_DIR=/tmp/ot-size-report
 #define PRIx64 "llx"
 
 
-git reset --hard 9eb960e3e2ae46610f91cdfbbc8502171098e8d1
-git archive 9eb960e3e2ae46610f91cdfbbc8502171098e8d1 | tar x -C "${OT_TMP_DIR}/b"
-git archive 53245bd06ccae962ea64ee4e5495b6694ef3c54b | tar x -C "${OT_TMP_DIR}/a" 
+git reset --hard 16a5c52d9fa0e4be8cf85028cdf30b23a426dede
+git archive 16a5c52d9fa0e4be8cf85028cdf30b23a426dede | tar x -C "${OT_TMP_DIR}/b"
+git archive bc195d13299e562641b2622f633a48fe47f9c017 | tar x -C "${OT_TMP_DIR}/a" 
 
 
 
