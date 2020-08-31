@@ -1,0 +1,104 @@
+body {
+    color: #333538;
+    font-family: "proxima-nova", sans-serif;
+}
+
+body.sidebar-padded {
+    padding-left: 240px;
+}
+
+.content-wrapper {
+    background-color: #FFFFFF;
+}
+
+/*
+ =====================================================
+ */
+.hero-container {
+    text-align: center;
+}
+
+.hero-title {
+    color: #36A2EB;
+    font-family: "proxima-nova-soft", sans-serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.hero-subtitle {
+    font-family: "proxima-nova-soft", sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+}
+
+/*
+ ==================
+ */
+
+.button {
+    border: 0;
+    text-align: center;
+    display: inline-block;
+    padding: 16px;
+    margin: 8px;
+    color: #FFFFFF;
+    background-color: #E7E9ED;
+    border-radius: 8px;
+    font-family: "proxima-nova-soft", sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    transition: box-shadow 200ms ease-out;
+}
+
+.button:hover {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.button:active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+}
+
+.button__red {
+    background-color: #FF6384;
+}
+
+.button__blue {
+    background-color: #36A2EB;
+}
+
+.button__black {
+    background-color: #333538;
+}
+
+/*
+ ==============================
+ */
+.hero-button-wrapper {
+    padding: 20px 0;
+}
+
+.hero-button-wrapper .button {
+    width: 150px;
+}
+
+.select-container {
+    text-align: center;
+}
+
+.chart-all-container {
+    margin: auto;
+    width: 50%;
+}
+
+.chart-individual-container {
+    display: flex;
+    justify-content: center;
+}
+
+.chart-individual-item {
+    float: left;
+    width: 250px;
+    margin-left: 30px;
+    margin-right: 30px;
+}

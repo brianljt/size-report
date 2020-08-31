@@ -1,0 +1,311 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Stepped Line Chart</title>
+
+    <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+
+    <script src="https://use.typekit.net/kfx1lmb.js"></script>
+    <script>try {Typekit.load({ async: true })} catch (e) {}</script>
+
+    <script type="text/javascript" src="../static/js/myscript.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css">
+</head>
+
+<body onload="load();">
+
+<div class="content-wrapper">
+    <div class="hero-container">
+        <h1 class="hero-title">Size Report</h1>
+        <h2 class="hero-subtitle">A tool to log, compare, display code size change history</h2>
+        <div class="hero-button-wrapper">
+            <a class="button button__red"
+               href="https://docs.google.com/document/d/19Mi1X2a9Y5EeAMDLKsj6GJjE6aEj3QV7wKpgPD1ygd4/" target="_blank">Design Doc</a>
+            <a class="button button__black" href="https://github.com/brianljt/size-report" target="_blank">GitHub</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <script>$('.selectpicker').selectpicker('refresh')</script>
+    <div class="select-container" style="text-align: center">
+        Showing size of
+        <select class="selectpicker" id="commit_num" onchange="CommitNumChange(this)">
+            <!--        <select class="selectpicker" id="commit_num">-->
+            <option value="10">10</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        commits
+    </div>
+
+    <div class="chart-all-container">
+        <canvas id="chart_all"></canvas>
+    </div>
+
+    <hr>
+
+    <div class="chart-individual-container">
+        <div class="chart-individual-item">
+            <canvas id="chart_text"></canvas>
+        </div>
+        <div class="chart-individual-item">
+            <canvas id="chart_data"></canvas>
+        </div>
+        <div class="chart-individual-item">
+            <canvas id="chart_bss"></canvas>
+        </div>
+        <div class="chart-individual-item">
+            <canvas id="chart_total"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+  var commitnum = 10
+  var commitid = []
+  var show_text = []
+  var show_data = []
+  var show_bss = []
+  var show_total = []
+
+  var ctx_all = document.getElementById('chart_all')
+  var chart_all = new Chart(ctx_all, {
+    type: 'line',
+    data: {
+      labels: commitid,
+      datasets: [
+        {
+          label: 'text',
+          color: 'rgb(239,207,255)',
+          borderColor: 'rgb(239,207,255)',
+          fill: false,
+          data: show_text,
+          steppedLine: true,
+        },
+        {
+          label: 'data',
+          color: 'rgb(255,197,115)',
+          borderColor: 'rgb(255,197,115)',
+          fill: false,
+          data: show_data,
+          steppedLine: true,
+        },
+        {
+          label: 'bss',
+          color: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false,
+          data: show_bss,
+          steppedLine: true,
+        },
+        {
+          label: 'total',
+          color: 'rgb(151,187,205)',
+          borderColor: 'rgb(151,187,205)',
+          fill: false,
+          data: show_total,
+          steppedLine: true,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      legend: {
+        position: 'bottom'
+      },
+      scales: {
+        xAxes: [{ display: false }],
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+      },
+    },
+  })
+
+  var ctx_text = document.getElementById('chart_text')
+  var chart_text = new Chart(ctx_text, {
+    type: 'line',
+    data: {
+      labels: commitid,
+      datasets: [{
+        label: 'text',
+        color: 'rgb(239,207,255)',
+        borderColor: 'rgb(239,207,255)',
+        fill: false,
+        data: show_text,
+        steppedLine: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      legend: {
+        position: 'bottom'
+      },
+      scales: {
+        xAxes: [{ display: false }],
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+      },
+    },
+  })
+
+  var ctx_data = document.getElementById('chart_data')
+  var chart_data = new Chart(ctx_data, {
+    type: 'line',
+    data: {
+      labels: commitid,
+      datasets: [{
+        label: 'data',
+        color: 'rgb(255,197,115)',
+        borderColor: 'rgb(255,197,115)',
+        fill: false,
+        data: show_data,
+        steppedLine: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      legend: {
+        position: 'bottom'
+      },
+      scales: {
+        xAxes: [{ display: false }],
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+      },
+    },
+  })
+
+  var ctx_bss = document.getElementById('chart_bss')
+  var chart_bss = new Chart(ctx_bss, {
+    type: 'line',
+    data: {
+      labels: commitid,
+      datasets: [{
+        label: 'bss',
+        color: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        fill: false,
+        data: show_bss,
+        steppedLine: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      legend: {
+        position: 'bottom'
+      },
+      scales: {
+        xAxes: [{ display: false }],
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+      },
+    },
+  })
+
+  var ctx_total = document.getElementById('chart_total')
+  var chart_total = new Chart(ctx_total, {
+    type: 'line',
+    data: {
+      labels: commitid,
+      datasets: [{
+        label: 'total',
+        color: 'rgb(151,187,205)',
+        borderColor: 'rgb(151,187,205)',
+        fill: false,
+        data: show_total,
+        steppedLine: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      legend: {
+        position: 'bottom'
+      },
+      scales: {
+        xAxes: [{ display: false }],
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+      },
+    },
+  })
+
+  async function load () {
+    let datalist = await GetDataListBySummaryList()
+
+    chart_all.data.labels = datalist[0]
+    chart_all.data.datasets[0].data = datalist[1]
+    chart_all.data.datasets[1].data = datalist[2]
+    chart_all.data.datasets[2].data = datalist[3]
+    chart_all.data.datasets[3].data = datalist[4]
+    window.chart_all.update()
+
+    chart_text.data.labels = datalist[0]
+    chart_text.data.datasets[0].data = datalist[1]
+    window.chart_text.update()
+
+    chart_data.data.labels = datalist[0]
+    chart_data.data.datasets[0].data = datalist[1]
+    window.chart_data.update()
+
+    chart_bss.data.labels = datalist[0]
+    chart_bss.data.datasets[0].data = datalist[1]
+    window.chart_bss.update()
+
+    chart_total.data.labels = datalist[0]
+    chart_total.data.datasets[0].data = datalist[1]
+    window.chart_total.update()
+  }
+
+  async function CommitNumChange (obj) {
+    commitnum = $('#commit_num').val()
+    let datalist = await GetDataListBySummaryList('', commitnum)
+
+    chart_all.data.labels = datalist[0]
+    chart_all.data.datasets[0].data = datalist[1]
+    chart_all.data.datasets[1].data = datalist[2]
+    chart_all.data.datasets[2].data = datalist[3]
+    chart_all.data.datasets[3].data = datalist[4]
+    window.chart_all.update()
+
+    chart_text.data.labels = datalist[0]
+    chart_text.data.datasets[0].data = datalist[1]
+    window.chart_text.update()
+
+    chart_data.data.labels = datalist[0]
+    chart_data.data.datasets[0].data = datalist[1]
+    window.chart_data.update()
+
+    chart_bss.data.labels = datalist[0]
+    chart_bss.data.datasets[0].data = datalist[1]
+    window.chart_bss.update()
+
+    chart_total.data.labels = datalist[0]
+    chart_total.data.datasets[0].data = datalist[1]
+    window.chart_total.update()
+  }
+
+</script>
+</body>
+
+</html>

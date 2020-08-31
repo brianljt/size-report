@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Stepped Line Chart</title>
+    <script src="{{ url_for('static', filename='Chart.min.js') }}"></script>
+</head>
+
+<body>
+<div class="container" style="height: 30%; width: 30%">
+    <canvas id="myChart"></canvas>
+</div>
+<button id="addData">Add Data</button>
+<script>
+  var ctx = document.getElementById('myChart')
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
+      datasets: [
+        {
+          label: 'total',
+          color: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          fill: false,
+          data: [65, 59, 80, 81, 56, 55, 40],
+          steppedLine: true,
+        },
+        {
+          label: 'bss',
+          color: 'rgb(151,187,205)',
+          borderColor: 'rgb(151,187,205)',
+          fill: false,
+          data: [28, 48, 40, 19, 86, 27, 90],
+          steppedLine: true,
+        }
+      ]
+    },
+  })
+
+  document.getElementById('addData').addEventListener('click', function () {
+    if (myChart.data.datasets.length > 0) {
+      myChart.data.labels.push(myChart.data.labels.length)
+      for (var index = 0; index < myChart.data.datasets.length; ++index) {
+        if (typeof myChart.data.datasets[index].data[0] === 'object') {
+          myChart.data.datasets[index].data.push({
+            x: myChart.data.datasets[index].data.length,
+            y: 100 * Math.random(),
+          })
+        } else {
+          myChart.data.datasets[index].data.push(100 * Math.random())
+        }
+      }
+
+      window.myChart.update()
+    }
+  })
+
+</script>
+</body>
+
+</html>
